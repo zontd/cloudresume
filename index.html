@@ -7,11 +7,15 @@
    ================================================== -->
    <script src="js/modernizr.js"></script>
    <script src="main.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   
+
+
 </head>
 <body>
     <header>
         <h1>Dan Zonta</h1>
-        <p>Visitor Count: <span id="visitCount"></span></p><p><a id="counter"></a></p>
+        <p>Visitor Count: <span id="visitorCount"></span></p>
         
 
     </header>
@@ -43,5 +47,22 @@
 
     <footer>
     </footer>
+    <script>
+        // Your AJAX script here
+        $.ajax({
+            method: 'GET',
+            url: 'https://api.api-ninjas.com/v1/counter?id=dansresume&hit=true',
+            headers: { 'X-Api-Key': 'bOw7D4nZvuhTsLivwD+pnQ==rWvXLpdbq5TOw9EL' },
+            contentType: 'application/json',
+            success: function(result) {
+                console.log(result);
+                $('#visitorCount').text(result.value);
+            },
+            error: function ajaxError(jqXHR) {
+                console.error('Error: ', jqXHR.responseText);
+            }
+        });
+    </script>
+    
 </body>
 </html>
