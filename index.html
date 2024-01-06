@@ -5,8 +5,9 @@
     <link rel="stylesheet" href="ResumeCSS.css">
        <!-- Script
    ================================================== -->
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-   
+   <script src="js/modernizr.js"></script>
+   <script src="main.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script
 
 
 </head>
@@ -47,17 +48,22 @@
     </footer>
     <script>
         // Your AJAX script here
-        $.ajax({
-            method: 'GET',
-            url: 'https://api.api-ninjas.com/v1/counter?id=dansresume&hit=true',
-            headers: { 'X-Api-Key': 'bOw7D4nZvuhTsLivwD+pnQ==rWvXLpdbq5TOw9EL' },
-            contentType: 'application/json',
-            success: function(result) {
-                console.log(result);
-                $('#visitorCount').text(result.value);
-            },
-            error: function ajaxError(jqXHR) {
-                console.error('Error: ', jqXHR.responseText);
+      $(document).ready(function() {
+            $.ajax({
+                method: 'GET',
+                url: 'https://api.api-ninjas.com/v1/counter?id=dansresume&hit=true',
+                headers: { 'X-Api-Key': 'Your-API-Key' },
+                contentType: 'application/json',
+                success: function(result) {
+                    console.log(result);
+                    if(result && result.value) {
+                        $('#visitorCount').text(result.value);
+                    } else {
+                        console.error('Invalid response format');
+                    }
+                },
+                error: function ajaxError(jqXHR) {
+                    console.error('Error: ', jqXHR.responseText);
             }
         });
     </script>
