@@ -5,8 +5,6 @@
     <link rel="stylesheet" href="ResumeCSS.css">
        <!-- Script
    ================================================== -->
-   <script src="js/modernizr.js"></script>
-   <script src="main.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script
 
 
@@ -14,8 +12,7 @@
 <body>
     <header>
         <h1>Dan Zonta</h1>
-        <p>Visitor Count: <span id="visitorCount"></span></p>
-        
+        <p>Visitor Count: <span id="visitorCount">Loading...</span></p>        
 
     </header>
 
@@ -47,24 +44,24 @@
     <footer>
     </footer>
     <script>
-        // Your AJAX script here
-      $(document).ready(function() {
+     $(document).ready(function() {
             $.ajax({
                 method: 'GET',
                 url: 'https://api.api-ninjas.com/v1/counter?id=dansresume&hit=true',
-                headers: { 'X-Api-Key': 'Your-API-Key' },
-                contentType: 'application/json',
+                headers: { 'X-Api-Key': 'bOw7D4nZvuhTsLivwD+pnQ==rWvXLpdbq5TOw9EL' },
                 success: function(result) {
-                    console.log(result);
-                    if(result && result.value) {
+                    if (result && typeof result.value === 'number') {
                         $('#visitorCount').text(result.value);
                     } else {
-                        console.error('Invalid response format');
+                        console.error('Unexpected response format:', result);
+                        $('#visitorCount').text('Unavailable');
                     }
                 },
-                error: function ajaxError(jqXHR) {
-                    console.error('Error: ', jqXHR.responseText);
-            }
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('AJAX error:', textStatus, 'Details:', errorThrown);
+                    $('#visitorCount').text('Unavailable');
+                }
+            });
         });
     </script>
     
